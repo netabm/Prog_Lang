@@ -1,0 +1,42 @@
+<program> ::= <statement> | <statement> <program>
+
+<statement> ::= <function_def> | <lambda_call> | <function_call> | <boolean_expr> | <arithmetic_expr> | <conditional_expr>
+
+<function_def> ::= "Defun" "{" "name" ":" <identifier> "," "arguments" ":" <params> "," "}" <expression>
+
+<lambda_expr> ::= "Lambd" <params> "." <expression>
+
+<lambda_call> ::= <lambda_expr> "(" <args> ")"
+
+<function_call> ::= <identifier> "(" <args>? ")"
+
+<expression> ::= <arithmetic_expr> | <boolean_expr> | <function_call> | <lambda_call> | <literal> | <conditional_expr> | <comparison_expr>
+
+<arithmetic_expr> ::= <term> | <term> <arithmetic_op> <arithmetic_expr>
+
+<boolean_expr> ::= <term> | <term> <boolean_op> <boolean_expr> | "!" <term>
+
+<comparison_expr> ::= <term> | <term> <comparison_op> <comparison_expr>
+
+<conditional_expr> ::= <boolean_expr> "?" <expression> ":" <expression>
+
+<params> ::= <identifier> | <identifier> "," <params>
+
+<term> ::= <literal> | "(" <expression> ")"
+
+<args> ::= <expression> | <expression> "," <args>
+
+<arithmetic_op> ::= "+" | "-" | "*" | "/" | "%"
+
+<boolean_op> ::= "&&" | "||"
+
+<comparison_op> ::= "==" | "!=" | ">" | "<" | ">=" | "<="
+
+<literal> ::= <integer> | <boolean>
+
+<identifier> ::= /[a-zA-Z_][a-zA-Z_0-9]*/
+
+<integer> ::= /-?\d+/
+
+<boolean> ::= "TRUE" | "FALSE"
+

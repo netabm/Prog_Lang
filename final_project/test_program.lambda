@@ -1,0 +1,114 @@
+# 1. Basic function definition and recursion
+Defun { name: factorial, arguments: (n,) } (n == 0) ? 1 : (n * factorial(n - 1))
+# Test factorial
+factorial(5)
+# Expected output: 120
+
+# 2. Test for "while loop" : Recursive function to sum numbers from n to 0
+Defun {name: sum_to_n, arguments: (n)} (n == 0) ? 0 : (n + sum_to_n(n - 1))
+# Test sum_to_n
+sum_to_n(10)
+# Expected output: 55
+
+# 3. Fibonacci sequence - testing recursion with multiple base cases
+Defun { name: fibonacci, arguments: (n,) } (n <= 1) ? n : (fibonacci(n - 1) + fibonacci(n - 2))
+# Test fibonacci
+fibonacci(7)
+# Expected output: 13
+
+# 4. Recursive sum of digits
+Defun { name: sum_digits, arguments: (n,) } (n < 10) ? n : (n % 10 + sum_digits(n / 10))
+# Test sum of digits
+sum_digits(12345)
+# Expected output: 15
+
+# 5. Recursive Function for Power Calculation
+Defun { name: power, arguments: (base, exp) } (exp == 0) ? 1 : (exp == 1) ? base : base * power(base, exp - 1)
+# Test power
+power(5, 5)
+# Expected output: 3125
+
+# 6. Conditional expressions
+Defun { name: abs, arguments: (x,) } (x < 0) ? -x : x
+# Test absolute value
+abs(-7)
+# Expected output: 7
+
+# 7. Multiple argument functions
+Defun { name: max_of_three, arguments: (a, b, c) } (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c)
+# Test max of three
+max_of_three(5, 9, 3)
+# Expected output: 9
+
+# 8. Error division by zero
+Defun { name: divide, arguments: (a, b,) } a / b
+# Test divide
+divide(4, 0)
+# Expected output: Error: Division by zero
+
+# 9. Recursive greatest common divisor
+Defun { name: gcd, arguments: (a, b) } (b == 0) ? a : gcd(b, a % b)
+# Test GCD
+gcd(48, 18)
+# Expected output: 6
+
+# 10. Higher-order function with lambda
+Defun {name: add, arguments: (x, y, z)} x + y + z
+# Test higher-order function
+add((Lambd t.(Lambd x.(Lambd y.(Lambd z. (x + y + z + t)))))(1, 2, 3, 4), factorial(5), (Lambd x.(Lambd y. (x + y)))(fibonacci(6), sum_digits(1234)))
+# Expected output: 148
+
+# 11. Lambda expressions and immediate application
+(Lambd x.(Lambd y.(x * y)))(3, 4)
+# Expected output: 12
+
+# 12. Nested lambda expressions
+(Lambd t.(Lambd x.(Lambd y.(Lambd z. (x + y + z + t)))))(1, 2, 3, 4)
+# Expected output: 10
+
+# 13. Boolean operations
+(5 > 3) && (10 != 5)
+# Expected output: TRUE
+
+Defun { name: is_even, arguments: (n) } (n % 2 == 0) ? TRUE : FALSE
+Defun { name: is_odd, arguments: (n) } (n % 2 != 0) ? TRUE : FALSE
+# Test is_even and is_odd
+is_even(4) && is_odd(3)
+# Expected output: TRUE
+
+# 14. Arithmetic operations with operator precedence
+2 + 3 * 4 - 6 / 2
+# Expected output: 11
+
+# 15. Modulo operation
+17 % 5
+# Expected output: 2
+
+# 16. Comparison operations
+(10 >= 10) && (5 < 7)
+# Expected output: TRUE
+
+# 17. Function composition
+Defun { name: square, arguments: (x,) } x * x
+Defun { name: increment, arguments: (x,) } x + 1
+# Test function composition
+square(increment(4))
+# Expected output: 25
+
+# 18. Nested Function Calls
+Defun {name: add, arguments: (x, y)} x + y
+# Test nested function calls
+add(factorial(3), factorial(4))
+# Expected output: 30
+
+# 19. Function Call with Too Few Arguments
+Defun { name: subtract, arguments: (a, b) } a - b
+# Test subtract with too few arguments
+subtract(5)
+# Expected output: Error: subtract expects 2 arguments but got 1
+
+# 20. Function Call with Too Many Arguments
+Defun { name: multiply, arguments: (a, b) } a * b
+# Test multiply with too many arguments
+multiply(2, 3, 4)
+# Expected output: Error: multiply expects 2 arguments but got 3
